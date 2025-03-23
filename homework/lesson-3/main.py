@@ -91,7 +91,7 @@ while m<=20:
 # Leap year
 year=input("write a number of each year for checking whether it is leap: ")
 year=int(year)
-if year % 4==0:
+if year % 4==0 and year%100!=0:
     print ("This year is leap!")
 elif year%4==0 and year%100==0 and (year%400!=0):
    print ("This year is not leap")
