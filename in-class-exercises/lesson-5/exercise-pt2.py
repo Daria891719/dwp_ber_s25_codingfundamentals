@@ -9,3 +9,8 @@ Create a simple dice roll simulator where you use the randint function to simula
 '''
 
 # solution for exercise 4 👇🏽
+from random import randint
+def number ():
+    return randint (1,6)
+a=number ()
+print (a)
