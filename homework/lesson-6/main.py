@@ -32,6 +32,7 @@ print ("The difference between 2 methods is ", round(sum/len)-round (average))
 # d=int(input("Write down the first number: "))
 # e=int(input("Write down the second number: "))
 # res=calculator (d,e)
+print ("Mathematical function")
 def add (d,e):
     print ("The sum of ", d," and ", e, " is ", d+e)
 def sub (d,e):
@@ -61,3 +62,35 @@ try:
     result(d, e, operation)
 except ValueError:
     print("You entered invalid characters. Please enter only integers.")
+#Create "Guess the Number" game! Your program generates a random number between 1 and 100. Then asks the user to guess the random number. The user have 5 times to guess the number. If they cannot guess it correctly during this 5 rounds, they loose. Each round that the user guess the number wrong, your program gives the user a hint like "Too low!" or "Too high!". If the guess is correct it should print "Correct!" and prints the number of tries.
+# Instructions: Write a function to generate a random number. Write a function to ask the user for their guess. Write a function to check if the guess is correct, too high, or too low. Write a main function that loops until the user guesses correctly and provides feedback.
+print ("Guess the number between 0 and 100. You have 5 attempts! ")
+from random import randint
+def com ():
+    return randint(0,100)
+def user():
+    while True:
+        try:
+            user_attemt=int(input("Write a number from 0 to 100 "))
+            return user_attemt
+        except ValueError:
+            print("You entered invalid characters. Please enter only integers.")
+def play ():
+    com_chooce=int(com())
+    attempt=1
+    while attempt <=5:
+        user_chooce=user()
+        if com_chooce==user_chooce:
+            print ("Well done! You win!!!")
+            print(f"You guessed it in {attempt} tries.")
+            return
+        else: 
+            if com_chooce>user_chooce:
+                print ("Too low!")
+            elif com_chooce<user_chooce:
+                print ("Too high!")
+            attempt+=1
+    print ("Sorry, you lose!")    
+    print ("The number that had to be guessed was ", com_chooce)
+start_play=play ()
+
