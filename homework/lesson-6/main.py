@@ -5,7 +5,7 @@ from random import randint
 rand_numbers=[]
 def generation_numbers ():
     c=0
-    while c<=10:
+    while c<10:
         rand_numbers.append(randint(0,100))
         c+=1
     print ("We created the list: ", rand_numbers)
