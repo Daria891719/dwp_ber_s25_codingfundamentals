@@ -1,4 +1,4 @@
-'''
+
 # Exercise 1: Student Grouping
 # Imagine you are a teacher who needs to group their students into pairs or small groups. Given the following list of dictionaries, create random pairs or groups of students – each pair has to have the same project choice.
 import random 
@@ -154,7 +154,7 @@ def play_game():
     else: 
         print("Congrats! You won 👏")
 play_game()
-'''
+
 # Exercise 4: Credit Card Masking
 # Complete the mask_credit_card_number function that takes in a 16-digit credit card number and masks all but the last 4 digits.
 
