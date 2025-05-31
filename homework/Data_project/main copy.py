@@ -56,5 +56,6 @@ def pie_chart (massiv):
     labels = massiv["Department"].values
     plt.pie(y, labels=labels, autopct='%1.1f%%')
     plt.title ("Quantity of people in each department")
+    plt.savefig("department_pie_chart.png")  # Сохраняем графи
     plt.show()
 pie_chart(quantity_df)
