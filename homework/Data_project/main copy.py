@@ -2,14 +2,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 def reading (filepath): 
-    # reading the file as a table
     df = pd.read_csv(filepath)
     print("Some rows of the dataframe") 
     #  Check of the columns and information in them (the first 2 and the last 2)
     print(df.head(2))
     print(df.tail(2))
     print("Some information about column of the dataframe") 
-    # receiving some statistical information about information
+    # Receiving some statistical information about information
     print (df.describe(include="all"))
     return df
 filepath = "/workspaces/dwp_ber_s25_codingfundamentals/homework/Data_project/DataAnalysisProjectData.txt"
@@ -34,16 +33,16 @@ print(f"List of departments: ", department_list)
 
 def print_mean_salary(df):
     print ("Mean salary of each department:")
-    grouped = df[["Department",'Salary']].groupby(["Department"], as_index=False).mean().round(2) 
-    grouped.rename(columns={'Salary': 'Mean Salary', "Department":"Department"}, inplace=True)
+    grouped = df[["Department","Salary"]].groupby(["Department"], as_index=False).mean().round(2) 
+    grouped.rename(columns={"Salary": "Mean Salary"}, inplace=True)
     print(grouped)
 print_mean_salary(df)
 
 def print_mean_quantity(df):
     print ("Quantity of people in each department:")          
     quantity = df.groupby(["Department"]).count()["Name"]
-    quantity_columns = quantity.to_frame(name="Precentage").reset_index()
-    quantity_columns["Precentage"] = quantity_columns["Precentage"] / quantity_columns["Precentage"].sum()*100
+    quantity_columns = quantity.to_frame(name="Percentage").reset_index()
+    quantity_columns["Percentage"] = quantity_columns["Percentage"] / quantity_columns["Percentage"].sum()*100
     # grouped_quantity_columns.rename(columns={'Percentage': 'Percentage', "Department":"Department"}, inplace=True)
     # quantity_department={}
     # for department in range(0,len (department_list)):
@@ -51,10 +50,11 @@ def print_mean_quantity(df):
     # print(quantity_department) 
     print(quantity_columns)
     return quantity_columns
-quantity=print_mean_quantity(df)
+quantity_df=print_mean_quantity(df)
 def pie_chart (massiv):
-    y = np.array(quantity["Precentage"])
-    labels = quantity["Department"]
+    y = massiv["Percentage"].values
+    labels = massiv["Department"].values
     plt.pie(y, labels=labels, autopct='%1.1f%%')
+    plt.title ("Quantity of people in each department")
     plt.show()
-pie_chart(quantity)
+pie_chart(quantity_df)

@@ -1,18 +1,21 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-# After importing the file, we write the path to its in filepath
+def reading (filepath): 
+    # reading the file as a table
+    df = pd.read_csv(filepath)
+    print("Some rows of the dataframe") 
+    #  Check of the columns and information in them (the first 2 and the last 2)
+    print(df.head(2))
+    print(df.tail(2))
+    return df
 filepath = "/workspaces/dwp_ber_s25_codingfundamentals/homework/Data_project/DataAnalysisProjectData.txt"
-# reading the file as a table
-df = pd.read_csv(filepath)
-print("Some rows of the dataframe") 
-# Check of the columns and information in them (the first 2 and the last 2)
-print(df.head(2))
-print(df.tail(2))
+df= reading (filepath)
 print("Some information about column of the dataframe") 
 # receiving some statistical information about information
 print (df.describe(include="all"))
-# print ("Statistical information based on given one:")
+
+print ("Statistical information based on given one:")
 # Average salary
 avg_salary = df["Salary"].mean()
 print(f"Average salary: {avg_salary}")
@@ -38,37 +41,20 @@ print_mean_salary(df)
 
 def print_mean_quantity(df):
     print ("Quantity of people in each department:")          
-    grouped_quantity = df.groupby(["Department"]).count()["Name"]
-    grouped_quantity_columns = grouped_quantity.to_frame(name="Precentage").reset_index()
-    grouped_quantity_columns["Precentage"] = grouped_quantity_columns["Precentage"] / grouped_quantity_columns["Precentage"].sum()*100
+    quantity = df.groupby(["Department"]).count()["Name"]
+    quantity_columns = quantity.to_frame(name="Precentage").reset_index()
+    quantity_columns["Precentage"] = quantity_columns["Precentage"] / quantity_columns["Precentage"].sum()*100
     # grouped_quantity_columns.rename(columns={'Percentage': 'Percentage', "Department":"Department"}, inplace=True)
     # quantity_department={}
     # for department in range(0,len (department_list)):
     #     quantity_department[department]=df["Name"].count
     # print(quantity_department) 
-    print(grouped_quantity_columns)
-    return grouped_quantity_columns
-print_mean_quantity(df)
-# Create a pie chart
-# plt.style.use('_mpl-gallery-nogrid')
-
-
-# colors = plt.get_cmap('Blues')(np.linspace(0.2, 0.7, len(grouped_quantity_columns)))
-
-# # plot
-# fig, ax = plt.subplots()
-# ax.pie(x, colors=colors, radius=3, center=(4, 4),
-#        wedgeprops={"linewidth": 1, "edgecolor": "white"}, frame=True)
-
-# ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-#        ylim=(0, 8), yticks=np.arange(1, 8))
-
-# plt.show()
-
-# import matplotlib as plt
-# from matplotlib import pyplot
-# plt.scatter(df["Salary"],df["Age"])
-# # set x/y labels and plot title
-# plt.pyplot.xlabel("Age")
-# plt.pyplot.ylabel("Salary")
-# plt.pyplot.title("Dependence Salary from age")
+    print(quantity_columns)
+    return quantity_columns
+quantity=print_mean_quantity(df)
+def pie_chart (massiv):
+    y = np.array(quantity["Precentage"])
+    labels = quantity["Department"]
+    plt.pie(y, labels=labels, autopct='%1.1f%%')
+    plt.show()
+pie_chart(quantity)
