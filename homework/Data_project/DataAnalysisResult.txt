@@ -1,0 +1,24 @@
+
+
+--- Mean salary of each department: ---
+,Department,Mean Salary
+0,HR,78235.29
+1,IT,76666.67
+2,Marketing,72352.94
+3,Sales,73200.0
+
+
+--- Quantity of people in each department ---
+Department,Share (%)
+HR,17.0
+IT,24.0
+Marketing,34.0
+Sales,25.0
+
+
+--- Salary Dependence on Age ---
+Department,20-30,30-40,40-50,50-60
+HR,83125.0,69000.0,80000.0,80000.0
+IT,69000.0,73333.33,81666.67,80000.0
+Marketing,72307.69,70000.0,75833.33,75000.0
+Sales,70625.0,66000.0,79375.0,75000.0

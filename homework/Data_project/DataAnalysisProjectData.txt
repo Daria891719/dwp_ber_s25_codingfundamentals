@@ -99,5 +99,3 @@ Ivan,48,Sales,22,60000
 Helen,37,Marketing,31,75000
 Helen,44,Sales,39,70000
 Eve,32,Marketing,12,55000
-
-
