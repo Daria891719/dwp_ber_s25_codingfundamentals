@@ -36,13 +36,22 @@ def print_mean_salary(df):
     grouped = df[["Department","Salary"]].groupby(["Department"], as_index=False).mean().round(2) 
     grouped.rename(columns={"Salary": "Mean Salary"}, inplace=True)
     print(grouped)
-print_mean_salary(df)
+    return grouped 
+def bar_mean_salary(df):
+    grouped = print_mean_salary(df)
+    plt.bar(grouped["Department"], grouped["Mean Salary"])
+    plt.xlabel("Department")
+    plt.ylabel("Mean Salary")
+    plt.title("Mean Salary by Department")
+    plt.savefig("department_mean_salary.png")  # Save the bar chart
+    plt.show()
+bar_mean_salary(df)
 
 def print_mean_quantity(df):
     print ("Quantity of people in each department:")          
     quantity = df.groupby(["Department"]).count()["Name"]
-    quantity_columns = quantity.to_frame(name="Percentage").reset_index()
-    quantity_columns["Percentage"] = quantity_columns["Percentage"] / quantity_columns["Percentage"].sum()*100
+    quantity_columns = quantity.to_frame(name="Share (%)").reset_index()
+    quantity_columns["Share (%)"] = quantity_columns["Share (%)"] / quantity_columns["Share (%)"].sum()*100
     # grouped_quantity_columns.rename(columns={'Percentage': 'Percentage', "Department":"Department"}, inplace=True)
     # quantity_department={}
     # for department in range(0,len (department_list)):
@@ -52,10 +61,11 @@ def print_mean_quantity(df):
     return quantity_columns
 quantity_df=print_mean_quantity(df)
 def pie_chart (massiv):
-    y = massiv["Percentage"].values
+    y = massiv["Share (%)"].values
     labels = massiv["Department"].values
     plt.pie(y, labels=labels, autopct='%1.1f%%')
+    plt.axis('equal')  # Makes the pie chart round
     plt.title ("Quantity of people in each department")
-    plt.savefig("department_pie_chart.png")  # Сохраняем графи
+    plt.savefig("department_pie_chart.png")  # Save the pie chart
     plt.show()
 pie_chart(quantity_df)
